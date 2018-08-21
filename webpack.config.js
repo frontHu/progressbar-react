@@ -58,7 +58,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.json']
+    extensions: ['*', '.js', '.jsx', '.json'],
+    react: path.resolve('node_modules/react'),
+
   },
   devServer: {
     historyApiFallback: true,
