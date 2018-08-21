@@ -1,2 +1,2 @@
 import progressbarReact from './progressbar-react';
-export default progressbarReact
+export default progressbarReact;
