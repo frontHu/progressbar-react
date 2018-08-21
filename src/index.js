@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactProgressBar from './react-progressbar';
+import ProgressBarReact from './lib/progressbar-react';
 
-ReactDOM.render(<ReactProgressBar />, document.getElementById('root'));
+ReactDOM.render(<ProgressBarReact />, document.getElementById('root'));

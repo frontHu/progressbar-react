@@ -1,9 +1,11 @@
 var path = require('path');
 var webpack = require('webpack')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // var merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 
 
 
@@ -15,8 +17,7 @@ module.exports = {
     filename: 'build.js'
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.css$/,
         use: ['style-loader', 'css-loader', {
           loader: require.resolve('postcss-loader'),
@@ -40,7 +41,12 @@ module.exports = {
       {
         test: /\.(js|jsx|mjs)$/,
         include: path.resolve(__dirname, './src'),
-        use: ['babel-loader']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['react', 'es2015']
+          }
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -52,37 +58,29 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['*', '.js', '.jsx', '.json']
   },
   devServer: {
     historyApiFallback: true,
     noInfo: true,
     overlay: true
   },
-  devtool: '#eval-source-map',
-  plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: path.resolve('./index.html'),
-    }),
-    // new MiniCssExtractPlugin('react-progressbar.css')
-  ]
+  devtool: '#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
-  // module.exports.entry = './src/lib/index.js'
-  module.exports.entry = './src/app.js'
+  module.exports.entry = './src/lib/index.js'
   module.exports.output = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'react-progressbar.js',
-    library: 'ReactProgressBar',
+    filename: 'index.js',
+    library: 'ProgressBarReact',
     libraryTarget: 'umd',
     umdNamedDefine: true
   }
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new MiniCssExtractPlugin('react-progressbar.css'),
+    new ExtractTextPlugin('progressbar-react.css'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'

@@ -1,0 +1,41 @@
+.react-progress {
+  width: 100%;
+  height: 6px;
+}
+.react-outer-progress {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  border-radius: 3px;
+}
+.react-inner-progress {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  background: #3d83fe;
+  z-index: 8;
+  border-radius: 3px;
+}
+.react-inner-progress-btn {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+  z-index: 9;
+  top: 50%;
+  margin-top: -4px;
+}
+.react-inner-progress-btn::after{
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  margin-top: -2px;
+  margin-left: -2px;
+  background-color: blue;
+}
