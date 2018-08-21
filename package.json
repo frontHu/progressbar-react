@@ -1,6 +1,6 @@
 {
   "name": "progressbar-react",
-  "version": "1.0.18",
+  "version": "1.0.23",
   "description": "",
   "main": "dist/index.js",
   "keywords": [],
@@ -19,12 +19,11 @@
     "url": "https://github.com/frontHu/progressbar-react/issues"
   },
   "homepage": "https://github.com/frontHu/progressbar-react#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "css-loader": "^1.0.0",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
-  },
-  "devDependencies": {
+    "react-dom": "^16.4.2",
     "autoprefixer": "^9.1.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

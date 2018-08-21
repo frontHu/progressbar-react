@@ -58,8 +58,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.json'],
-    react: path.resolve('node_modules/react'),
+    extensions: ['*', '.js', '.jsx', '.json']
 
   },
   devServer: {
