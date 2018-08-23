@@ -59,7 +59,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
-
+  },
+  externals: {
+    React: 'react'
   },
   devServer: {
     historyApiFallback: true,
