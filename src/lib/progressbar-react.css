@@ -30,11 +30,11 @@ html{
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #fff; 
   z-index: 9;
   top: 50%;
   margin-top: -6px;
-  /* margin-left: -6px; */
+  right: -6px;
 }
 .react-inner-progress-btn-inner{
   position: absolute;
