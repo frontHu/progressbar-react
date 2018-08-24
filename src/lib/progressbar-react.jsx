@@ -5,7 +5,7 @@ class ReactProgress extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      PERCENT: 0, //进度
+      PERCENT: this.props.percent, //进度
       BAR_LEFT: 0, //进度条的百分比
       BTN_LEFT: 0 //拖动按钮的百分比
     }
@@ -14,12 +14,14 @@ class ReactProgress extends Component {
     this.propgressInner = null;
     this.progressBtnWidth = 0;
     this.propgressContainerWidth = 0;
+    this.color = this.props.color ? this.props.color : '#1890ff';
+    this.seekTo = this.props.seekTo ? this.props.seekTo : ()=>{}
   }
 
   componentDidMount() {
     this.init();
     this.dragMove();
-    // this.clickMove();
+    this.clickMove();
   }
   
   //初始化
@@ -30,12 +32,13 @@ class ReactProgress extends Component {
     this.progressContainerWidth = this.progressContainer.offsetWidth;
   }
 
-  //设置进度条
-  setPercent(PERCENT) {
+  //设置进度
+  setPercent(L) {
     this.setState({
-      PERCENT, 
-      BAR_LEFT: `${Math.floor(Math.round(PERCENT * 100 / this.progressContainerWidth))}%`,
-      BTN_LEFT: Math.floor(Math.round(PERCENT - this.progressBtnWidth / 2))
+      PERCENT: Math.floor(Math.round(L * 100 / this.progressContainerWidth)), 
+      BAR_LEFT: L
+    }, () => {
+      this.seekTo();
     });
   }
 
@@ -71,13 +74,13 @@ class ReactProgress extends Component {
   clickMove() {
     this.progressContainer.onclick = (e) => {
       e.stopPropagation();
-      let PERCENT = e.clientX - this.getOffsetLeft(this.progressContainer);
-      if(PERCENT <= 0) {
-        PERCENT = 0;
-      }else if(PERCENT >= this.progressContainerWidth-this.progressBtnWidth) {
-        PERCENT = this.progressContainerWidth-this.progressBtnWidth;
-      }
-      this.setPercent(PERCENT);
+      let L = e.clientX - this.getOffsetLeft(this.progressContainer);
+      if(L <= 0) {
+        L = 0;
+      }else if(L >= this.progressContainerWidth-this.progressBtnWidth) {
+        L = this.progressContainerWidth-this.progressBtnWidth;
+      } 
+      this.setPercent(L);
     }
   }
 
@@ -91,22 +94,33 @@ class ReactProgress extends Component {
     return left;
   }
 
+
   render() {
-    console.log(this.state.BAR_LEFT, this.state.PERCENT, this.state.PERCENT)
+    console.log(this.state.PERCENT)
     return (
       <div className="react-progress">
         <div id="outer-progress" className="react-outer-progress" >
           <span
             id='inner-progress'
             className="react-inner-progress"
-            style={{ width: this.state.BAR_LEFT}}
+            style={{
+              width: `${this.state.PERCENT}%`,
+              backgroundColor: this.color
+            }}
           >
           </span>
           <span
               id='btn-progress'
               className="react-inner-progress-btn"
-              style={{ left: this.state.BAR_LEFT}}
-            ></span>
+              style={{left: `${this.state.PERCENT}%`, marginLeft: this.state.PERCENT===100?'-6px':''}}
+            >
+              <span 
+                className="react-inner-progress-btn-inner"
+                style={{
+                  backgroundColor: this.color
+                }}
+              ></span>
+            </span>
         </div>
       </div>
     )
