@@ -7,13 +7,13 @@ class ReactProgress extends Component {
     this.state = {
       PERCENT: this.props.percent
     }
-    this.progressContainer = null;
-    this.progressBtn = null;
-    this.propgressInner = null;
-    this.progressBtnWidth = 0;
-    this.propgressContainerWidth = 0;
-    this.color = this.props.color ? this.props.color : '#1890ff';
-    this.seekTo = this.props.seekTo ? this.props.seekTo : ()=>{};
+    this.progressContainer = null; //外层进度条容器
+    this.progressBtn = null; //拖动按钮
+    this.propgressInner = null; //内层进度条容器
+    this.progressBtnWidth = 0; //拖动按钮宽度
+    this.propgressContainerWidth = 0; //外层进度条容器宽度
+    this.color = this.props.color ? this.props.color : '#1890ff'; //设置进度条颜色
+    this.seekTo = this.props.seekTo ? this.props.seekTo : ()=>{}; //设置进度条跳转后触发事件
   }
 
   componentDidMount() {
@@ -41,7 +41,6 @@ class ReactProgress extends Component {
       ev.stopPropagation();
       var ev = ev || window.event;
       var disX = ev.clientX - this.progressBtn.offsetLeft;
-
       document.onmousemove = (ev) => {
         ev.stopPropagation();
         var ev = ev || window.event;
@@ -51,7 +50,6 @@ class ReactProgress extends Component {
         } else if (L >= this.progressContainerWidth) {
           L = this.progressContainerWidth;
         }
-        console.log(L * 100 / this.progressContainerWidth, 'l')
         this.setPercent(L);
       }
 
